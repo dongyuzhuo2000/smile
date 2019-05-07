@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+        <meta name="renderer" content="webkit"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+        <meta itemprop="name" content="创意云" />
+        <meta itemprop="image" content="./images/demo-5.png" />
+        <meta name="description" itemprop="description" content="创意云" />
+        <title>创意云</title>
+        <meta name="Keywords" content="创意云">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+        <link rel="stylesheet" href="//static.vsochina.com/vsocss/common.css" />
+        <link rel="stylesheet" href="//static.vsochina.com/libs/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./font/iconfont.css">
+        <link rel="stylesheet" href="//static.vsochina.com/public/popup/css/vso.popup.css" />
+        <link rel="stylesheet" href="./css/slick.min.css">
+        <link rel="stylesheet" href="./css/index.css">
+        <link rel="stylesheet" href="./css/footer.css">
+
+        <script src="//static.vsochina.com/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="//static.vsochina.com/libs/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="//static.vsochina.com/vsojs/cookie.js"></script>
+        <script src="//static.vsochina.com/vsojs/referer_getter.js"></script>
+        <script src="//static.vsochina.com/libs/vue/2.3.4/vue.min.js"></script>
+        <script src="//static.vsochina.com/libs/es6-promise-polyfill/es6-promise.auto.min.js"></script>
+        <script src="//static.vsochina.com/libs/axios/0.16.2/axios.min.js"></script>
+        <script src="//static.vsochina.com/libs/qs/6.4.0/qs.js"></script>
+        <script src="//static.vsochina.com/public/popup/js/vso.popup.min.js"></script>
+        <link rel="stylesheet" href="./font/font_0io5ke6bcg6k/iconfont.css">
+    </head>
+    <body>
+        <div id="v_vsoCloud" class="olist-wrapper" v-cloak>
+            <!-- header -->
+            <header class="org-header clearfix">
+                <a href="http://c-ves.com/">
+                    <img class="org-header-logo iconfont pull-left" src="./images/vsoCloud_logo.png" alt="logo">
+                    <!-- <i class="org-header-logo iconfont pull-left">&#xe63a;</i> -->
+                </a>
+                <div class="org-header-menu-list">
+                    <div class="org-header-menu-item">发现</div>
+                    <div class="org-header-menu-item">产品</div>
+                    <div class="org-header-menu-item">服务</div>
+                    <div class="org-header-menu-item">解决方案</div>
+                    <div class="org-header-menu-item">教育</div>
+                    <div class="org-header-menu-item">活动</div>
+                    <div class="org-header-menu-item">论坛</div>
+                    <div class="org-header-menu-item">帮助</div>
+                </div>
+                <div class="org-header-list clearfix">
+                    <a
+                        href="javascript:void(0)"
+                        class="org-header-item pull-right"
+                        @click="showSide">
+                        <img src="./images/menu.png" alt="菜单">
+                    </a>
+                    <!-- <a href="javascript:void(0);" class="org-header-item pull-right">中文</a> -->
+                </div>
+            </header>
+            <aside class="org-sidebar" :style="{width: sideVisible ? (window.innerWidth < 300 ? window.innerWidth + 'px' : '300px') : 0}">
+                <a href="javascript:void(0);" class="org-sidebar-close" @click="hideSide"></a>
+                <dl class="org-sidebar-list">
+                    <dt>学会概况</dt>
+                    <dd><a href="javascript:void(0);">学会介绍</a></dd>
+                    <dd><a href="javascript:void(0);">组织架构</a></dd>
+                    <dd><a href="javascript:void(0);">联系方式</a></dd>
+                    <dt>学会动态</dt>
+                    <dt>行业动态</dt>
+                    <dd><a href="javascript:void(0);">行业信息</a></dd>
+                    <dd><a href="javascript:void(0);">行业活动</a></dd>
+                    <dd><a href="javascript:void(0);">前沿技术</a></dd>
+                    <dt>行业培训</dt>
+                    <dt>会员信息</dt>
+                    <dd><a href="javascript:void(0);">企业会员</a></dd>
+                    <dd><a href="javascript:void(0);">个人会员</a></dd>
+                    <dd><a href="javascript:void(0);">预备会员</a></dd>
+                    <dd><a href="javascript:void(0);">会员申请</a></dd>
+                </dl>
+            </aside>
+            <!-- /header -->
+
+            <!-- banner -->
+            <section id="v_org_banner" class="org-banner swiper-container">
+                <div class="swiper-wrapper">
+                    <div v-for="(item, index) in bannerList" :key="index" class="swiper-slide">
+                        <img class="org-banner-bg" :src="item.url" :alt="item.title">
+                        <div class="org-banner-left">
+                            <div class="org-banner-animation">
+                                <div class="org-banner-category">{{item.category}}</div>
+                                <div class="org-banner-title">{{item.title}}</div>
+                                <div class="org-banner-info">{{item.info}}</div>
+                            </div>
+                            <a :href='item.link || "javascript:void(0);"' class="org-banner-more">立即咨询</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </section>
+            <!--/ banner -->
+
+            <!-- association -->
+            <section class="org-association clearfix">
+                <div v-for="(item, index) in associatioList" :key="index" class="org-association-item">
+                    <img class="org-association-item-bg" :src="item.url" :alt="item.title">
+                    <div class="org-association-item-title">
+                        <div class="org-association-item-titleText">{{item.title}}</div>
+                        <div class="org-association-item-category">{{item.category}}</div>
+                    </div>
+                </div>
+            </section>
+            <!-- /association -->
+
+            <!-- tendency -->
+            <section class="org-tendency">
+                <div class="org-tendency-top clearfix">
+                    <div class="org-title org-tendency-title pull-left">官方合作案例</div>
+                    <a href="javascript:void(0);" class="org-tendency-more pull-right">查看更多</a>
+                </div>
+                <div id="v_tendency_carousel" class="org-tendency-carousel">
+                    <div v-for="(item, index) in tendencyList" :key="index" class="org-tendency-carousel-item">
+                        <img class="org-tendency-carousel-img" :src="item.url" :alt="item.title">
+                        <div class="org-tendency-carousel-info clearfix">
+                            <div class="org-tendency-carousel-title">{{item.title}}</div>
+                            <div class="org-tendency-carousel-subtitle">{{item.subtitle}}</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ tendency -->
+
+            <!-- relative productions -->
+            <section class="org-relative-productions">
+                <div class="org-relative-productions-top">
+                    <div class="org-title org-relative-productions-title">官方合作案例</div>
+                    <div class="org-relative-productions-subtitle">安捷秀制片系统 / 云端渲染农场 / 供应链精通 / 影视众包服务 / 云计算解决方案</div>
+                </div>
+                <div v-for="(item, index) in relativeProductionsList" :key="index" class="org-relative-production clearfix">
+                    <template v-if="index % 2 === 0">
+                        <div class="org-relative-production-left">
+                            <img class="org-relative-production-bgImg" :src="item.url_bg" :alt="item.title"/>
+                            <template v-if="item.url">
+                                <img class="org-relative-production-img" :src="item.url" :alt="item.title"/>
+                            </template>
+                        </div>
+                        <div class="org-relative-production-right">
+                            <div class="org-relative-production-right-title">{{item.title}}</div>
+                            <div class="org-relative-production-right-subtitle">{{item.subtitle}}</div>
+                            <template v-if="index === 2">
+                                <div>
+                                    <div>注册开通</div>
+                                    <div>上传资料实名认证</div>
+                                </div>
+                            </template>
+                            <template v-else>
+                                <div class="org-relative-production-right-info">{{item.info}}</div>
+                            </template>
+                            <div class="org-relative-production-right-btns">
+                                <div class="org-relative-production-right-btn_1">{{item.btm_text_1}}</div>
+                                <div class="org-relative-production-right-btn_2">{{item.btm_text_2}}</div>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div class="org-relative-production-left_second">
+                                <div class="org-relative-production-right-title">{{item.title}}</div>
+                                <div class="org-relative-production-right-subtitle">{{item.subtitle}}</div>
+                                <template v-if="index === 1">
+                                    <div>Hello</div>
+                                </template>
+                                <template v-else>
+                                    <div class="org-relative-production-right-info">{{item.info}}</div>
+                                </template>
+                                <div class="org-relative-production-right-btns">
+                                    <div class="org-relative-production-right-btn_1">{{item.btm_text_1}}</div>
+                                    <div class="org-relative-production-right-btn_2">{{item.btm_text_2}}</div>
+                                </div>
+                        </div>
+                        <div class="org-relative-production-right_second">
+                            <img class="org-relative-production-bgImg" :src="item.url_bg" :alt="item.title"/>
+                            <template v-if="item.url">
+                                <img class="org-relative-production-img" :src="item.url" :alt="item.title"/>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </section>
+            <!--/ relative-productions -->
+
+            <!-- bottom -->
+            <section class="ord-bottom-background">
+                <footer class="org-footer clearfix">
+                    <!-- 左 -->
+                    <section class="org-left left">
+                        <img class="org-header-logo-left" src="./images/vsoCloud_logo.png" alt="logo">
+                        <p class="org-branch">科技赋能创意，连接创意价值</p>
+                    </section>
+                    <!-- 中 -->
+                    <div class="org-center left">
+                        <div class="org-nav">
+                            <span>产品</span>
+                            <span>服务</span>
+                            <span>帮助</span>
+                            <span>事业群</span>
+                        </div>
+                        <ul  class="left">
+                            <li><a href="javascript:">影视制片系统</a></li>
+                            <li><a href="javascript:">渲染调度管理</a></li>
+                            <li><a href="javascript:">元计算解决方案</a></li>
+                        </ul>
+                        <ul class="left">
+                            <li><a href="javascript:">云会议</a></li>
+                            <li><a href="javascript:">创意工具</a></li>
+                            <li><a href="javascript:">创意云管家</a></li>
+                        </ul>
+                        <ul class="left">
+                            <li><a href="javascript:">渲染农场</a></li>
+                            <li><a href="javascript:">制片管理</a></li>
+                            <li><a href="javascript:">原创孵化</a></li>
+                        </ul>
+                        <ul class="left">
+                            <li><a href="javascript:">供应链金融</a></li>
+                            <li><a href="javascript:">版权保护申请</a></li>
+                            <li><a href="javascript:">影视分包服务</a></li>
+                        </ul>
+                        <ul class="left">
+                            <li><a href="javascript:">注册</a></li>
+                            <li><a href="javascript:">登录</a></li>
+                            <li><a href="javascript:">下载</a></li>
+                        </ul>
+                        <ul class="left">
+                            <li><a href="javascript:">关于我们</a></li>
+                            <li><a href="javascript:">帮助中心</a></li>
+                            <li><a href="javascript:">用户中心</a></li>
+                        </ul>
+                        <ul class="left">
+                            <li><a href="javascript:">影视制作</a></li>
+                            <li><a href="javascript:">动漫制作</a></li>
+                            <li><a href="javascript:">创意设计</a></li>
+                        </ul>
+                    </div>
+                    <!-- 右 -->
+                    <div class="org-right left">
+                        <img src="./images/weibo.png" alt="微博">
+                        <img src="./images/weixin.png" alt="微信">
+                        <span>咨询热线:400-164-7979</span>
+                    </div>
+                    <div class="org-border left"></div>
+                    <div class="org-right-logo left">
+                        <img class="left" src="./images/zhifu.png" alt="支付">
+                        <img class="left" src="./images/zhifu.png" alt="">
+                        <img class="left" src="./images/zhifu.png" alt="">
+                        <img class="left" src="./images/zhifu.png" alt="">
+                        <img class="left" src="./images/zhifu.png" alt="">
+                    </div>
+                </footer>
+                <div class="org-mediamax">
+                    <span>
+                        <i class="iconfont icon-ttww"></i>
+                        <i class="iconfont icon-QQ"></i>
+                        <i class="iconfont icon-weixin"></i>
+                        <i class="iconfont icon-weibo"></i>
+                    </span>
+                    <div class="shengming">
+                        <p>&copy;2019VSOCloud. copy right reserve </p>
+                        <p>法律声明</p>
+                    </div>
+                </div>
+            </section>
+             <!-- 下 -->
+            <div class="org-bottom">
+                <span class="left">网络文化经营许可证：苏网文(2015)2048-047 | 增值电信业务经营许可证：苏B1.B2 - 20150425 | 备案：苏ICP备15035421号 | Copyright &copy; 2008 - 2009 苏州创意云网络科技有限公司 | 版权所有</span>
+                <i class="iconfont icon-ttww"></i>
+                <i class="iconfont icon-QQ"></i>
+                <i class="iconfont icon-weixin"></i>
+                <i class="iconfont icon-weibo"></i>
+            </div>
+            <!-- bottom -->
+
+
+
+            <!-- <section class="org-bottom clearfix">
+                <div class="org-bottom-nav pull-left"><a class="active">首页</a></div>
+                <a href="javascript:void(0);" class="org-bottom-top pull-right" @click="backToTop">返回顶部<i class="iconfont">&#xe69c;</i></a>
+            </section> -->
+            <!--/ bottom -->
+
+            <!-- footer -->
+            <!-- <footer class="org-footer clearfix">
+                <img class="org-header-logo pull-left" src="./images/vsoCloud_logo.png" alt="logo"> -->
+                <!-- <i class="org-header-logo pull-left">&#xe63a;</i> -->
+                <!-- <div class="org-header-title pull-left">
+                    <div class="org-ch">中国电影美术学会视效专业委员会</div>
+                    <div class="org-en">China Film and Art Society Visual Effects Professional Committee</div>
+                </div>
+                <div class="org-footer-right">
+                    <div>
+                        <span>联系电话：400-164-7979</span>
+                        <span>官方邮箱：cfas-vfx@landhightech.com</span>
+                    </div>
+                    <div>
+                        <span>网络文化经营许可证：苏网文(2015)2048-047</span>
+                        <span>增值电信业务经营许可证：苏B1.B2 - 20150425</span>
+                        <span>备案：苏ICP备15035421号</span>
+                        <span>Copyright © 2008 - {{new Date().getFullYear()}} 苏州创意云网络科技有限公司</span>
+                        <span>版权所有</span>
+                    </div>
+                </div>
+            </footer> -->
+            <!--/ footer -->
+        </div>
+
+        <!--[if !IE]><!-->
+        <link rel="stylesheet" href="//static.vsochina.com/libs/swiper/3.4.1/swiper.min.css">
+        <script src="//static.vsochina.com/libs/swiper/3.4.1/swiper.min.js"></script>
+        <!--<![endif]-->
+        <!--[if IE]>
+        <link rel="stylesheet" href="//static.vsochina.com/libs/swiper/2.7.6/idangerous.swiper.css">
+        <script src="//static.vsochina.com/libs/swiper/2.7.6/idangerous.swiper.js"></script>
+        <![endif]-->
+        <script src="./js/slick.min.js"></script>
+        <script src="./js/index.js"></script>
+    </body>
+</html>
